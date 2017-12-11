@@ -1,6 +1,6 @@
 # Mandelbrot
 
-El conjunto de mandelbrot se define con la sucesion recursiva $$z_{n + 1} = z_n + c$$
+El conjunto de mandelbrot se define con la sucesion recursiva $z_{n + 1} = z_n + c$
 donde z_0 = 0 y c es un punto arbitrario en el plano complejo, se dice que un punto
 c pertenece al conjunto si la sucesion esta acotada. Este programa genera una imagen
 (formato png, jpg u otro manejado por PIL, modulo de python) que representa dicho
@@ -14,14 +14,15 @@ resultado la siguiente imagen:
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_default.png)
 
 Los argumentos que permite son:
-    1. width, height: es un entero que especifica el ancho y alto de la
+
+    * width, height: es un entero que especifica el ancho y alto de la
         imagen repectivamente
-    2. scale: numero de pixeles que representa el uno del plano complejo,
+    * scale: numero de pixeles que representa el uno del plano complejo,
         es aconsejable que sea un cuarto de width o height.
-    3. name: nombre del archivo de salida
-    4. max-iteration: maxima iteración, entre mas alto sea este numero mas demora
+    * name: nombre del archivo de salida
+    * max-iteration: maxima iteración, entre mas alto sea este numero mas demora
         la ejecucion pero la imagen queda con mejor calidad.
-    5. percent-red, percent-green, percent-blue: porcentaje de iteraciones
+    * percent-red, percent-green, percent-blue: porcentaje de iteraciones
         en el que se considera rojo, verde y azul respectivamente.
 
 
