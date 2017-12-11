@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import sys
 
 
@@ -9,10 +7,13 @@ class ArgError(LookupError):
 
 
 class Args(dict):
-    def __init__(self, parameters={}):
+    def __init__(self, parameters={}, h=''):
         try:
             assert all(map(lambda x: isinstance(x, str), parameters.keys()))
             super(Args, self).__init__(parameters)
+            if '-h' in sys.argv:
+                print(h)
+                sys.exit()
             self.__init()
         except AssertionError:
             raise TypeError('the keys should be an instance of str') from None
