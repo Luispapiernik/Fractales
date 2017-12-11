@@ -1,11 +1,11 @@
 # Mandelbrot
 
-El conjunto de mandelbrot se define con la sucesion recursiva z_{n + 1} = z_n + c
+El conjunto de mandelbrot se define con la sucesión recursiva $$ z_{n+1} = z_{n} + c $$
 donde z_0 = 0 y c es un punto arbitrario en el plano complejo, se dice que un punto
 c pertenece al conjunto si la sucesion esta acotada. Este programa genera una imagen
 (con formato png, jpg u otro manejado por PIL, modulo de python) que representa dicho
 conjunto usando un algoritmo de escape en el que se itera sobre todos los puntos del
-plano complejo x + iy donde -2 < x < 2 y -2 < y < 2. Para saber si un punto c esta en
+plano complejo c = x + iy donde -2 < x < 2 y -2 < y < 2. Para saber si un punto c esta en
 el conjunto, se itera hasta un numero dado y dependiendo de cuantas iteraciones
 sean necesarias para considerarla como una sucesion no acotada se le asigna un color.
 
