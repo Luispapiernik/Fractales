@@ -1,6 +1,6 @@
 # Mandelbrot
 
-El conjunto de mandelbrot se define con la sucesion recursiva $$ z_{n + 1} $$ = z_n + c
+El conjunto de mandelbrot se define con la sucesion recursiva $$ z_{n + 1} = z_n + c $$
 donde z_0 = 0 y c es un punto arbitrario en el plano complejo, se dice que un punto
 c pertenece al conjunto si la sucesion esta acotada. Este programa genera una imagen
 (formato png, jpg u otro manejado por PIL, modulo de python) que representa dicho
