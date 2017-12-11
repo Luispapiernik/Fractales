@@ -14,14 +14,14 @@ resultado la siguiente imagen:
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_default.png)
 
 Los argumentos que permite son:
-    * width, height: es un entero que especifica el ancho y alto de la
+    1. width, height: es un entero que especifica el ancho y alto de la
         imagen repectivamente
-    * scale: numero de pixeles que representa el uno del plano complejo,
+    2. scale: numero de pixeles que representa el uno del plano complejo,
         es aconsejable que sea un cuarto de width o height.
-    * name: nombre del archivo de salida
-    * max-iteration: maxima iteración, entre mas alto sea este numero mas demora
+    3. name: nombre del archivo de salida
+    4. max-iteration: maxima iteración, entre mas alto sea este numero mas demora
         la ejecucion pero la imagen queda con mejor calidad.
-    * percent-red, percent-green, percent-blue: porcentaje de iteraciones
+    5. percent-red, percent-green, percent-blue: porcentaje de iteraciones
         en el que se considera rojo, verde y azul respectivamente.
 
 
