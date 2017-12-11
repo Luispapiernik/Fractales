@@ -1,1 +1,0 @@
-python mandelbrot1.1.py -width 1000 -height 1000 -scale 250 -percent_red 20 -percent_green 10 -percent_blue 5 -name mandebrot_red.png -- rojo
