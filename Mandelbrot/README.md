@@ -26,26 +26,21 @@ Los argumentos que permite son:
 
 
 ## Ejemplos
-Imagen generada con el comando:
+
 python mandelbrot.py -width 5000 -height 5000 -percent_red 60 -percent_green 40 -percent_blue 20 -scale 1250
 ![](mandelbrot_e1.png)
 
-Imagen generada con el comando:
 python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 20 -percent-blue 1 -percent-green 1
-![](mandelbrot_red.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_red.png)
 
-Imagen generada con el comando:
 python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 1 -percent-blue 20 -percent-green 1
-![](mandelbrot_blue.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_blue.png)
 
-Imagen generada con el comando:
 python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 1 -percent-blue 1 -percent-green 20
-![](mandelbrot_green.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_green.png)
 
-Imagen generada con el comando:
 python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 20 -percent-blue 20 -percent-green 20
-![](mandelbrot_gray.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_gray.png)
 
-Imagen generada con el comando:
 python mandelbrot.py -max-iteration 1000 -percent-red 2 -percent-green 4 -percent-blue 6 -width 1000 -height 1000 -scale 250
-![](mandelbrot_good.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_good.png)
