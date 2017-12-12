@@ -9,7 +9,7 @@ c pertenece al conjunto si la sucesión esta acotada. Este programa genera una i
 (con formato png, jpg u otro manejado por PIL, modulo de python) que representa dicho
 conjunto, usando un algoritmo de escape en el que se itera sobre todos los puntos del
 plano complejo c = x + iy donde -2 < x < 2 y -2 < y < 2. Para saber si un punto c esta en
-el conjunto, se itera hasta un numero dado y dependiendo de cuantas iteraciones
+el conjunto, se itera hasta un número dado y dependiendo de cuantas iteraciones
 sean necesarias para considerarla como una sucesión no acotada, se le asigna un color.
 
 El script principal es mandelbrot.py. Si se ejecuta sin argumentos da como
@@ -20,10 +20,10 @@ Los argumentos que permite son:
 
     * width, height: es un entero que especifica el ancho y alto de la
         imagen repectivamente.
-    * scale: numero de pixeles que representa el uno del plano complejo,
+    * scale: número de pixeles que representa el uno del plano complejo,
         es aconsejable que sea un cuarto de width o height.
     * name: nombre del archivo de salida.
-    * max-iteration: maxima iteración, entre mas alto sea este numero mas demora
+    * max-iteration: maxima iteración, entre mas alto sea este número mas demora
         la ejecución pero el conjunto queda mejor representado.
     * percent-red, percent-green, percent-blue: porcentaje de iteraciones
         en el que se considera rojo, verde y azul respectivamente.
