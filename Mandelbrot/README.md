@@ -1,6 +1,7 @@
 # Mandelbrot
 
-El conjunto de mandelbrot se define con la sucesión recursiva 
+El conjunto de mandelbrot se define con la sucesión recursiva
+
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/ecuacion.png)
 
 donde c es un punto arbitrario en el plano complejo, se dice que un punto
