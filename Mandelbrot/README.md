@@ -18,15 +18,15 @@ resultado la siguiente imagen:
 
 Los argumentos que permite son:
 
-    * width, height: es un entero que especifica el ancho y alto de la
-        imagen repectivamente.
-    * scale: número de pixeles que representa el uno del plano complejo,
-        es aconsejable que sea un cuarto de width o height.
-    * name: nombre del archivo de salida.
-    * max-iteration: maxima iteración, entre mas alto sea este número mas demora
-        la ejecución pero el conjunto queda mejor representado.
-    * percent-red, percent-green, percent-blue: porcentaje de iteraciones
-        en el que se considera rojo, verde y azul respectivamente.
+ * **width, height**: es un entero que especifica el ancho y alto de la
+     imagen repectivamente.
+ * **scale**: número de pixeles que representa el uno del plano complejo,
+     es aconsejable que sea un cuarto de width o height.
+ * **name**: nombre del archivo de salida.
+ * **max-iteration**: maxima iteración, entre mas alto sea este número mas demora
+     la ejecución pero el conjunto queda mejor representado.
+ * **percent-red, percent-green, percent-blue**: porcentaje de iteraciones
+     en el que se considera rojo, verde y azul respectivamente.
 
 
 ## Ejemplos
