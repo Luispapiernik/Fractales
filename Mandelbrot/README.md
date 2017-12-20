@@ -31,6 +31,8 @@ Los argumentos que permite son:
 
 ## Ejemplos
 
+Funciona con python 3
+
 python mandelbrot.py -width 5000 -height 5000 -percent-red 60 -percent-green 40 -percent-blue 20 -scale 1250
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_5000.png)
 
