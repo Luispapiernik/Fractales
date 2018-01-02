@@ -1,16 +1,15 @@
 # Cuadro de Sierpinski
 
-El script principal es sierpinski.py (se neccesita Args.py para funcionar) cuando
-se ejecuta sin argumentos da como resultado la siguiente imagen
+Cuando se ejecuta el script sin argumentos da como resultado la siguiente imagen
 
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/sierpinski.png)
 
-Los argumentos que permiten son:
-  * **length**: es un entero que especifica el tamaño de la imagen de salida.
-  * **name**: nombre de la imagen de salida
-  * **deep**: indica el nivel de recursión para la construcción de la imagen
-  * **background**: color de fondo de la imagen.
-  * **tiles**: color de los cuadros
+Los argumentos permitidos son:
+  * **-l o --length**: es un entero que especifica el tamaño de la imagen de salida.
+  * **-n o --name-image**: nombre de la imagen de salida
+  * **-rl o --recursion-level**: indica el nivel de recursión para la construcción de la imagen
+  * **-b o --background**: color de fondo de la imagen.
+  * **-t o --tiles**: color de los cuadros
   
   
 Los colores permitidos son:
@@ -32,6 +31,6 @@ Los colores permitidos son:
   
   ## Ejemplo.
   
-  python sierpinski.py -background WHITE -tiles RED -deep 6
+  python sierpinski.py -b WHITE --tiles RED -rl 6
   
   ![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/sierpinski_red.png)
