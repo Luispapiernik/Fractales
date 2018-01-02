@@ -24,7 +24,7 @@ Los argumentos que permite son:
  * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
      la ejecución pero el conjunto queda mejor representado.
  * **-p, --percents**: tupla con los porcentaje de iteraciones
-     en el que se considera rojo, verde y azul respectivamente.
+     en el que se considera rojo, verde y azul.
  * **-pr o --percent-red, -pg o --percent-green, -pb o --percent-blue**: indica el mismo
      valor que el argumento percents, solo que separado para cada color
 
