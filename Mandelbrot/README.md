@@ -12,22 +12,21 @@ plano complejo c = x + iy donde -2 < x < 2 y -2 < y < 2. Para saber si un punto 
 el conjunto, se itera hasta un número dado y dependiendo de cuantas iteraciones
 sean necesarias para considerarla como una sucesión no acotada, se le asigna un color.
 
-El script principal es mandelbrot.py. Si se ejecuta sin argumentos da como
-resultado la siguiente imagen:
+Si se ejecuta sin argumentos da como resultado la siguiente imagen:
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_default.png)
 
 Los argumentos que permite son:
 
- * **size**: dupla que indica el tamaño de la imagen de salida.
- * **scale**: número de pixeles que representa el uno del plano complejo,
+ * **--size**: dupla que indica el tamaño de la imagen de salida.
+ * **--scale**: número de pixeles que representa el uno del plano complejo,
      es conveniente que sea un cuarto del ancho o alto de la imagen.
- * **n, name-image**: nombre de la imagen de salida.
- * **m, max-iteration**: maxima iteración, entre mas alto sea este número mas demora
+ * **-n o --name-image**: nombre de la imagen de salida.
+ * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
      la ejecución pero el conjunto queda mejor representado.
- * **percents**: tupla con los porcentaje de iteraciones
+ * **-p, --percents**: tupla con los porcentaje de iteraciones
      en el que se considera rojo, verde y azul respectivamente.
- * **percent-red, percent-green, percent-blue**: indica el mismo valor que el argumento
-     percents, solo que separado para cada color
+ * **-pr o --percent-red, -pg o --percent-green, -pb o --percent-blue**: indica el mismo
+     valor que el argumento percents, solo que separado para cada color
 
 
 ## Ejemplos
