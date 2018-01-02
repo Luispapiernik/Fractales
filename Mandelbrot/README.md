@@ -18,35 +18,40 @@ resultado la siguiente imagen:
 
 Los argumentos que permite son:
 
- * **width, height**: es un entero que especifica el ancho y alto de la
-     imagen repectivamente.
+ * **size**: dupla que indica el tamaño de la imagen de salida.
  * **scale**: número de pixeles que representa el uno del plano complejo,
-     es aconsejable que sea un cuarto de width o height.
- * **name**: nombre del archivo de salida.
- * **max-iteration**: maxima iteración, entre mas alto sea este número mas demora
+     es conveniente que sea un cuarto del ancho o alto de la imagen.
+ * **n, name-image**: nombre de la imagen de salida.
+ * **m, max-iteration**: maxima iteración, entre mas alto sea este número mas demora
      la ejecución pero el conjunto queda mejor representado.
- * **percent-red, percent-green, percent-blue**: porcentaje de iteraciones
+ * **percents**: tupla con los porcentaje de iteraciones
      en el que se considera rojo, verde y azul respectivamente.
+ * **percent-red, percent-green, percent-blue**: indica el mismo valor que el argumento
+     percents, solo que separado para cada color
 
 
 ## Ejemplos
 
-Funciona con python 3
+Funciona con python 3 y python 2
 
-python mandelbrot.py -width 5000 -height 5000 -percent-red 60 -percent-green 40 -percent-blue 20 -scale 1250
+python mandelbrot.py --percent-red 1 -n add.png
+
+![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/add.png)
+
+python mandelbrot.py --size 5000 5000 --scale 1250 --percents 60 40 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_5000.png)
 
-python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 20 -percent-blue 1 -percent-green 1
+python mandelbrot.py --size 1000 1000 --scale 250 --percents 20 1 1
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_red.png)
 
-python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 1 -percent-blue 20 -percent-green 1
+python mandelbrot.py --size 1000 1000 --scale 250 --percents 1 1 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_blue.png)
 
-python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 1 -percent-blue 1 -percent-green 20
+python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 1 20 1
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_green.png)
 
-python mandelbrot.py -width 1000 -height 1000 -scale 250 -percent-red 20 -percent-blue 20 -percent-green 20
+python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 20 20 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_gray.png)
 
-python mandelbrot.py -max-iteration 1000 -percent-red 2 -percent-green 4 -percent-blue 6 -width 1000 -height 1000 -scale 250
+python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 2 4 6 -m 1000
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_good.png)
