@@ -33,7 +33,7 @@ Los argumentos que permite son:
 
 Funciona con python 3 y python 2
 
-python mandelbrot.py --percent-red 1 -n add.png
+python mandelbrot.py --percent-red 1
 
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/add.png)
 
