@@ -10,6 +10,8 @@ Los argumentos permitidos son:
   * **-b o --background**: color de fondo de la imagen.
   * **-t o --tiles**: color de los cuadros
   * **-rl o --recursion-level**: indica el nivel de recursión para la construcción de la imagen
+  * **-h o --help**: ayuda.
+  * **--version**: muestra versión.
   
   
 Los colores permitidos son:
@@ -30,6 +32,7 @@ Los colores permitidos son:
   * GOLDEN
   
   ## Ejemplo.
+  Funciona con python 2 y python 3.
   
   python sierpinski.py -b WHITE --tiles RED -rl 6
   
