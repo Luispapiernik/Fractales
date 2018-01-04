@@ -29,6 +29,8 @@ Los argumentos que permite son:
      valor que el argumento percents, solo que separado para cada color
  * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
      la ejecución pero el conjunto queda mejor representado.
+ * **-h o --help**: ayuda.
+ * **--version**: muestra la versión.
 
 
 ## Ejemplos
