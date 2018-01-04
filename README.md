@@ -7,4 +7,5 @@ para generar algunos fractales.
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_red.png)
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot.png)
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/fractal.png)
+![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/fractal.png)
 
