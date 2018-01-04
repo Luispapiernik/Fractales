@@ -1,6 +1,7 @@
 # Barnsley Fern
 
 Si se ejecuta el programa sin argumentos la imagen obtenida es:
+
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/barnsley.png)
 
  * **-n o --name-image**: nombre de la imagen de salida.
@@ -21,6 +22,7 @@ Si se ejecuta el programa sin argumentos la imagen obtenida es:
 Funciona con python 3 y python 2
 
 python barnsley.py -z 20
+
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/ej1.png)
 
 python barnsley.py --size 3200 3200 --color RED -z 400 -i 10000000
