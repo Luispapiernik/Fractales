@@ -17,16 +17,18 @@ Si se ejecuta sin argumentos da como resultado la siguiente imagen:
 
 Los argumentos que permite son:
 
+ * **-n o --name-image**: nombre de la imagen de salida.
  * **--size**: dupla que indica el tamaño de la imagen de salida.
+ * **-w o --width**: entero que indica el ancho de la imagen de salida.
+ * **--height**: entero que indica el alto de la imagen de salida.
  * **--scale**: número de pixeles que representa el uno del plano complejo,
      es conveniente que sea un cuarto del ancho o alto de la imagen.
- * **-n o --name-image**: nombre de la imagen de salida.
- * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
-     la ejecución pero el conjunto queda mejor representado.
  * **-p, --percents**: tupla con los porcentaje de iteraciones
      en el que se considera rojo, verde y azul.
  * **-pr o --percent-red, -pg o --percent-green, -pb o --percent-blue**: indica el mismo
      valor que el argumento percents, solo que separado para cada color
+ * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
+     la ejecución pero el conjunto queda mejor representado.
 
 
 ## Ejemplos
