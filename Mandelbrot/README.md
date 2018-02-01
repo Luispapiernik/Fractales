@@ -55,11 +55,11 @@ python mandelbrot.py --size 1000 1000 --scale 250 --percents 20 1 1
 python mandelbrot.py --size 1000 1000 --scale 250 --percents 1 1 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_blue.png)
 
-python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 1 20 1
+python mandelbrot.py --size 1000 1000 --scale 250 --percents 1 20 1
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_green.png)
 
-python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 20 20 20
+python mandelbrot.py --size 1000 1000 --scale 250 --percents 20 20 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_gray.png)
 
-python2 mandelbrot.py --size 1000 1000 --scale 250 --percents 2 4 6 -m 1000
+python mandelbrot.py --size 1000 1000 --scale 250 --percents 2 4 6 -m 1000
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_good.png)
