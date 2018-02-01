@@ -17,19 +17,24 @@ Si se ejecuta sin argumentos da como resultado la siguiente imagen:
 
 Los argumentos que permite son:
 
- * **-n o --name-image**: nombre de la imagen de salida.
- * **--size**: dupla que indica el tamaño de la imagen de salida.
- * **-w o --width**: entero que indica el ancho de la imagen de salida.
- * **--height**: entero que indica el alto de la imagen de salida.
- * **--scale**: número de pixeles que representa el uno del plano complejo,
-     es conveniente que sea un cuarto del ancho o alto de la imagen.
- * **-p, --percents**: tupla con los porcentaje de iteraciones
+ * **-n NAME_IMAGE, --name-image NAME_IMAGE**: NAME_IMAGE indica el nombre de
+     la imagen de salida.
+ * **--size WIDTH HEIGHT**: (WIDTH, HEIGHT) es una dupla que indica el tamaño
+     de la imagen de salida.
+ * **--w WIDTH, --width WIDTH**: WIDTH es un entero que indica el ancho de
+     la imagen de salida.
+ * **--height HEIGHT**: HEIGHT es un entero que indica el alto de la imagen de salida.
+ * **--scale SCALE**: ESCALE es el número de pixeles que representa el uno del plano
+     complejo, es conveniente que sea un cuarto del ancho o alto de la imagen.
+ * **-p RED GREEN BLUE**: (RED, GREEN, BLUE) es una tupla con los porcentaje de iteraciones
      en el que se considera rojo, verde y azul.
- * **-pr o --percent-red, -pg o --percent-green, -pb o --percent-blue**: indica el mismo
+ * **-pr RED, --percent-red RED;
+     -pg GREEN, --percent-green GREEN;
+     -pb BLUE, --percent-blue BLUE**: (RED, GREEN, BLUE) indican los mismo
      valor que el argumento percents, solo que separado para cada color
- * **-m o --max-iteration**: maxima iteración, entre mas alto sea este número mas demora
-     la ejecución pero el conjunto queda mejor representado.
- * **-h o --help**: ayuda.
+ * **-m MAX_ITERATION, --max-iteration MAX_ITERATION**: MAX_ITERATION indica la maxima iteración,
+     entre mas alto sea este número mas demora la ejecución pero el conjunto queda mejor representado.
+ * **-h, --help**: ayuda.
  * **--version**: muestra la versión.
 
 
