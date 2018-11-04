@@ -1,4 +1,4 @@
-# Cuadro de Sierpinski
+# Alfombra de Sierpinski
 
 Cuando se ejecuta el script sin argumentos da como resultado la siguiente imagen
 
