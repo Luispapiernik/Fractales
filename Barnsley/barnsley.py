@@ -1,6 +1,6 @@
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from cartesian import CartesianImage
 from random import choice
-from PIL import Image
 
 
 COLORS = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'CYAN': (0, 255, 255),
@@ -12,22 +12,29 @@ COLORS = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'CYAN': (0, 255, 255),
 
 
 def barnsley(args):
-    x, y = args.width or args.size[0], args.height or args.size[1]
-    img = Image.new("RGB", args.size, COLORS[args.background])
+    # configuracion de la imagen
+    width = args.width or args.size[0]
+    height = args.height or args.size[1]
+
+    img = CartesianImage(args.xinterval, args.yinterval, width, height,
+                         args.background_color)
+
     function = [lambda x, y: (0, 0.16 * y),
                 lambda x, y: (0.85 * x + 0.04 * y, -0.04 * x + 0.85 * y + 1.6),
                 lambda x, y: (0.2 * x - 0.26 * y, 0.23 * x + 0.22 * y + 1.6),
                 lambda x, y: (-0.15 * x + 0.28 * y,
                               0.26 * x + 0.24 * y + 0.44)]
-    z = args.zoom
+
     x0, y0 = 0, 0
-    for i in range(args.iterations):
-        if (z * abs(x0) < x / 2) and (0 <= z * abs(y0) < y):
-            img.putpixel((int((x - 1) * 0.5 + (z * x0)), int(y - 1 - z * y0)),
-                         COLORS[args.color])
+    for k in range(args.iterations):
+        i, j = img.getPosition(x0, y0)
+        if (0 <= i < width) and (0 <= j < height):
+            img.putpixel((i, j), COLORS[args.color], False)
+
         x0, y0 = function[choice([0, 1, 2, 3])](x0, y0)
 
     img.save(args.name_image)
+    img.show()
 
 
 def main():
@@ -61,16 +68,22 @@ def main():
                         help='width of the output image')
     parser.add_argument('--height', default=0, type=int,
                         help='height of the output image')
-    parser.add_argument('-c', '--color', default='WHITE', type=str,
+    parser.add_argument('-x', '--xinterval', default=(-5, 5), nargs=2,
+                        type=float, metavar=('xi', 'xf'),
+                        help='''interval of visualisation in the X axis''')
+    parser.add_argument('-y', '--yinterval', default=(0, 10), nargs=2,
+                        type=float, metavar=('yi', 'yf'),
+                        help='''interval of visualisation in the Y axis''')
+    parser.add_argument('-c', '--color', default='WHITE',
+                        type=lambda x: x.upper(),
                         choices=COLORS.keys(), metavar='COLOR',
                         help='color of the fern')
-    parser.add_argument('-b', '--background', default='BLACK', type=str,
+    parser.add_argument('-bc', '--background-color', default='BLACK',
+                        type=lambda x: x.upper(),
                         choices=COLORS.keys(), metavar='COLOR',
                         help='background color of image')
-    parser.add_argument('-z', '--zoom', default=1, type=float,
-                        help='''the default value is 1. With this value the
-                              output image is very small''')
-    parser.add_argument('-i', '--iterations', default=20000, type=int,
+
+    parser.add_argument('-i', '--iterations', default=200000, type=int,
                         help='''limit of iterations that the program do.
                                 if you want an image with good resolution,
                                 probably you want that this number be big.

@@ -40,7 +40,7 @@ Los argumentos que permite son:
 
 ## Ejemplos
 
-Funciona con python 3 y python 2
+Funciona con python 3
 
 python mandelbrot.py --percent-red 1
 
@@ -61,5 +61,5 @@ python mandelbrot.py --size 1000 1000 --scale 250 --percents 1 20 1
 python mandelbrot.py --size 1000 1000 --scale 250 --percents 20 20 20
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_gray.png)
 
-python mandelbrot.py --size 1000 1000 --scale 250 --percents 2 4 6 -m 1000
+python mandelbrot.py --size 1000 500 --percents 2 4 6 -m 1000 -x -2 2 -y 0 2
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_good.png)

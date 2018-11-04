@@ -59,10 +59,12 @@ def main():
                         help='''the output image has a square shape,
                                 this argument is the length of one of his
                                 edges. Default value is 360''')
-    parser.add_argument('-b', '--background', default='BLACK', type=str,
+    parser.add_argument('-b', '--background', default='BLACK',
+                        type=lambda x: x.upper(),
                         choices=COLORS.keys(), metavar='COLOR',
                         help='color of background. Default value is BLACk')
-    parser.add_argument('-t', '--tiles', default='WHITE', type=str,
+    parser.add_argument('-t', '--tiles', default='WHITE',
+                        type=lambda x: x.upper(),
                         choices=COLORS.keys(), metavar='COLOR',
                         help='color of the tiles. Default value is WHITE')
     parser.add_argument('-rl', '--recursion-level', default=3, type=int,
