@@ -6,8 +6,9 @@ class Cartesian(object):
     """Esta clase maneja las conversiones entre coordenandas de una matriz y
        coordenadas del plano cartesionano en una region rectangular definida"""
 
-    def __init__(self, xinterval: (int, int), yinterval: (int, int),
-                 width: int, height: int):
+    def __init__(self, xinterval, yinterval, width, height):
+        """xinterval: (int, int), yinterval: (int, int), width: int,
+        height: int"""
         self.xinterval = xinterval
         self.yinterval = yinterval
         self.height = height
@@ -29,14 +30,14 @@ class Cartesian(object):
             (self.yinterval[1] - self.yinterval[0]) - self.height / 2
         return x, y
 
-    def getCoordinate(self, column: int, row: int):
+    def getCoordinate(self, column, row):
         """retorna la coordenada (x, y) en el plano, dada una posicion en la
            matriz"""
         x = column - self.width / 2
         y = -row + self.height / 2
         return self.bijection(x, y)
 
-    def getPosition(self, x: float, y: float):
+    def getPosition(self, x, y):
         """retorna una posicion en la matrix dada unas coordenadas (x, y)"""
         x, y = self.inverse_bijection(x, y)
         column = x + self.width / 2
@@ -47,9 +48,11 @@ class Cartesian(object):
 class CartesianImage(Cartesian):
     """Esta clase representa una imagen en el plano cartesiano"""
 
-    def __init__(self, xinterval: (int, int), yinterval: (int, int),
-                 width: int, height: int, color=0, mode='RGB'):
-        """El argmento color puede ser especificado con el formato (R, G, B)"""
+    def __init__(self, xinterval, yinterval, width, height, color=0,
+                 mode='RGB'):
+        """El argmento color puede ser especificado con el formato (R, G, B)
+           xinterval: (int, int), yinterval: (int, int), width: int,
+           height: int"""
         super(CartesianImage, self).__init__(xinterval, yinterval, width,
                                              height)
 
@@ -63,14 +66,14 @@ class CartesianImage(Cartesian):
 
         return getattr(self._image, key)
 
-    def putpixel(self, pos: (float, float), color: (int, int, int),
-                 toInt=True):
+    def putpixel(self, pos, color, toInt=True):
+        """pos: (float, float), color: (int, int, int)"""
         if toInt:
             pos = self.getPosition(*pos)
         self._image.putpixel(pos, color)
 
 
-def sin():
+def testSin():
     image = CartesianImage((-2 * np.pi, 2 * np.pi), (-2, 2), 300, 300)
 
     for x in np.arange(-2 * np.pi, 2 * np.pi, 0.0001):
@@ -80,7 +83,8 @@ def sin():
 
 
 def main():
-    sin()
+    print('Este programa debe generar la grafica de seno en seno.png')
+    testSin()
 
 
 if __name__ == '__main__':
