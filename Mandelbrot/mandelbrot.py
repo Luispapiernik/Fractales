@@ -41,7 +41,8 @@ def mandelbrot(args):
                         False)
 
     img.save(args.name_image)
-    img.show()
+    if args.show:
+        img.show()
 
 
 def main():
@@ -57,7 +58,7 @@ def main():
                                 Default value is (360, 360)''')
     parser.add_argument('-w', '--width', default=0, type=int,
                         help='width of the output image')
-    parser.add_argument('--height', default=0, type=int,
+    parser.add_argument('-ht', '--height', default=0, type=int,
                         help='height of the output image')
     parser.add_argument('-x', '--xinterval', default=(-2, 2), nargs=2,
                         type=float, metavar=('xi', 'xf'),
@@ -84,6 +85,8 @@ def main():
                         help='percent of color blue')
     parser.add_argument('-m', '--max-iteration', default=100, type=int,
                         help='maximum iteration. Default value is 100')
+    parser.add_argument('--show', action='store_true',
+                        help='show the image')
 
     args = parser.parse_args()
 
