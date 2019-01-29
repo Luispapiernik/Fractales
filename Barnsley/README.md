@@ -1,4 +1,4 @@
-# Barnsley Fern - En desarrollo
+# Barnsley Fern
 
 
 Si se ejecuta el programa sin argumentos la imagen obtenida es:

@@ -1,5 +1,5 @@
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-from PIL import Image
+from PIL import Image, ImageDraw
 
 # colors
 COLORS = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'CYAN': (0, 255, 255),
@@ -10,18 +10,14 @@ COLORS = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'CYAN': (0, 255, 255),
           'BROWN': (165, 42, 42), 'GOLDEN': (255, 215, 0)}
 
 
-def square(point, length):
-    global img, tiles
-    for x in range(length):
-        for y in range(length):
-            img.putpixel((point[0] + x, point[1] + y), tiles)
-
-
 def sierpinski(deep, point, length):
+    global painter, tiles
+
     if deep:
         x, y = point
         nlength = length // 3
-        square((x + nlength, y + nlength), nlength)
+        x0, y0 = x + nlength, y + nlength
+        painter.rectangle([x0, y0, x0 + nlength, y0 + nlength], tiles, tiles)
         for i in [0, 1, 2]:
             for j in [0, 1, 2]:
                 sierpinski(deep - 1, (x + i * nlength, y + j * nlength),
@@ -29,7 +25,7 @@ def sierpinski(deep, point, length):
 
 
 def main():
-    global img, tiles
+    global painter, tiles
 
     epilog = '''The colors available are:
     - WHITE
@@ -69,16 +65,22 @@ def main():
                         help='color of the tiles. Default value is WHITE')
     parser.add_argument('-rl', '--recursion-level', default=3, type=int,
                         help='level of recursion. Default value is 3')
+    parser.add_argument('--show', action='store_true',
+                        help='show the image')
 
     args = parser.parse_args()
 
     length = args.length
     tiles = COLORS[args.tiles]
     img = Image.new("RGB", (length, length), COLORS[args.background])
+    painter = ImageDraw.Draw(img)
 
     sierpinski(args.recursion_level, (0, 0), length)
 
     img.save(args.name_image)
+
+    if args.show:
+        img.show()
 
 
 if __name__ == '__main__':
