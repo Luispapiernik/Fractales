@@ -21,7 +21,7 @@ class Cartesian:
         self.height = height
         self.width = width
 
-    def bijection(self, *, w: int, h: int) -> Coordinate:
+    def bijection(self, *, w: Real, h: Real) -> Coordinate:
         """
         This method does not represent a strict bijection. This method converts
         a coordinate in the matrix into a coordinate on the Cartesian plane.
@@ -125,12 +125,16 @@ class CartesianArray(Cartesian):
 
         self.mode = mode
         self.channels = self.get_channels(mode=mode)
-        self.array = np.ones((height, width, self.channels))
+        if self.channels > 1:
+            self.array = np.ones((height, width, self.channels))
+            # self.array = np.insert(self.array[:, :, None], [1], [1, 1], axis=2)
+        else:
+            self.array = np.ones((height, width))
         self.array[:, :] = color
 
     def write_sub_array(self, x_offset: int, y_offset: int, array: np.ndarray) -> None:
         self.array[
-            x_offset : x_offset + array.shape[0], y_offset : y_offset + array.shape[1]
+            y_offset: y_offset + array.shape[0], x_offset: x_offset + array.shape[1]
         ] = array
 
     def get_channels(self, *, mode: str) -> int:
