@@ -4,6 +4,8 @@ from typing import Any, Tuple
 import numpy as np
 from PIL import Image
 
+from fractals.utils import get_channels
+
 Coordinate = Tuple[Real, Real]
 
 
@@ -124,7 +126,7 @@ class CartesianArray(Cartesian):
             )
 
         self.mode = mode
-        self.channels = self.get_channels(mode=mode)
+        self.channels = get_channels(mode=mode)
         if self.channels > 1:
             self.array = np.ones((height, width, self.channels))
             # self.array = np.insert(self.array[:, :, None], [1], [1, 1], axis=2)
@@ -136,12 +138,6 @@ class CartesianArray(Cartesian):
         self.array[
             y_offset: y_offset + array.shape[0], x_offset: x_offset + array.shape[1]
         ] = array
-
-    def get_channels(self, *, mode: str) -> int:
-        if mode == "YCbCr":
-            return 3
-
-        return len(mode)
 
     def putpixel(self, *, position: Coordinate, color, to_int=True):
         if to_int:

@@ -8,7 +8,6 @@ from typing import Optional, Tuple, Union
 import numpy as np
 
 from fractals.cartesian import CartesianArray
-from fractals.color_data import PALLETES_DATA
 
 Coordinate = Tuple[Real, Real]
 Color = Union[int, str, Tuple[int, int, int], Tuple[int, int, int]]
@@ -46,13 +45,15 @@ def mandelbrot(
     y_interval: Coordinate = (-2, 2),
     color: Color = 0,
     mode: str = "L",
-    pallete: Optional[str] = None,
+    palette: Optional[str] = None,
     processes: Optional[int] = None,
     max_iteration: int = 256,
     escape_radius: int = 2,
     smooth: bool = False,
     invert=False,
+    verbose: int = 0,
 ):
+    verbose_level = [0, 20, 10, 5, 2, 1][min(5, verbose)]
     mandelbrot_image = CartesianArray(
         width=width,
         height=height,
@@ -89,9 +90,10 @@ def mandelbrot(
 
             escape_velocities.append(int(255 * escape_rate))
 
-            percent = 100 * len(escape_velocities) / (real_height * width)
-            if isclose(percent % 5, 0, rel_tol=0.1):
-                print(f"Getting escape rates, {percent}% finished ...")
+            if verbose:
+                percent = 100 * len(escape_velocities) / (real_height * width)
+                if isclose(percent % verbose_level, 0, rel_tol=0.1):
+                    print(f"Getting escape rates, {percent}% finished ...")
 
     if mandelbrot_image.channels == 1:
         array = np.array(escape_velocities).reshape(real_height, width)
@@ -100,7 +102,7 @@ def mandelbrot(
         if is_vertical_symmetric:
             flipped_array = np.flip(
                 array[
-                    (height & 1) :,
+                    (height & 1):,
                 ],
                 axis=0,
             )
@@ -110,9 +112,10 @@ def mandelbrot(
 
     image = mandelbrot_image.get_image()
     if mode == "P":
-        image.putpalette(PALLETES_DATA[pallete])
+        image.putpalette(palette)
 
     image.save("mandelbrot.png")
+    return image
 
 
 def test_1():
@@ -121,7 +124,7 @@ def test_1():
         width=512,
         height=512,
         mode="L",
-        pallete="turbo",
+        palette="turbo",
         max_iteration=20,
         smooth=True,
         escape_radius=1000,
@@ -142,7 +145,6 @@ def example_1():
         width=512,
         height=512,
         mode="L",
-        pallete="turbo",
         max_iteration=20,
         smooth=True,
         escape_radius=1000,
@@ -155,7 +157,7 @@ def example_2():
         width=512,
         height=512,
         mode="P",
-        pallete="turbo",
+        palette="turbo",
         max_iteration=256,
         smooth=True,
         escape_radius=1000,
