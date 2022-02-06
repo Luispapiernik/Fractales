@@ -6,8 +6,9 @@ from numbers import Real
 from typing import Optional, Tuple, Union
 
 import numpy as np
-from cartesian import CartesianArray
-from color_data import PALLETES_DATA
+
+from fractals.cartesian import CartesianArray
+from fractals.color_data import PALLETES_DATA
 
 Coordinate = Tuple[Real, Real]
 Color = Union[int, str, Tuple[int, int, int], Tuple[int, int, int]]
@@ -99,7 +100,7 @@ def mandelbrot(
         if is_vertical_symmetric:
             flipped_array = np.flip(
                 array[
-                    (height & 1):,
+                    (height & 1) :,
                 ],
                 axis=0,
             )
