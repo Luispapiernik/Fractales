@@ -1,8 +1,6 @@
 from matplotlib.pyplot import bar
-from .mandelbrot import mandelbrot
-from .barnsley import barnsley
 
-__all__ = [
-    "barnsley",
-    "mandelbrot"
-]
+from .barnsley import barnsley
+from .mandelbrot import mandelbrot
+
+__all__ = ["barnsley", "mandelbrot"]

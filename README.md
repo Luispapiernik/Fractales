@@ -36,7 +36,7 @@ sean necesarias para considerarla como una sucesión no acotada, se le asigna un
 Si se ejecuta sin argumentos da como resultado la siguiente imagen:
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_default.png)
 
-usage: 
+usage:
 
      mandelbrot.py [-h] [-n FILENAME] [--size WIDTH HEIGHT] [-w WIDTH]
                      [--height HEIGHT] [-x xi xf] [-y yi yf] [-bc R G B]
@@ -106,7 +106,7 @@ python mandelbrot.py --size 1000 500 --percents 2 4 6 -m 1000 -x -2 2 -y 0 2
 Si se ejecuta el programa sin argumentos la imagen obtenida es:
 
 ![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/barnsley.png)
- 
+
 ## Ejemplos
 
 Funciona con python 3
@@ -136,8 +136,8 @@ Los argumentos permitidos son:
   * **-rl o --recursion-level**: indica el nivel de recursión para la construcción de la imagen
   * **-h o --help**: ayuda.
   * **--version**: muestra versión.
-  
-  
+
+
 Los colores permitidos son:
   * WHITE
   * BLACK
@@ -151,13 +151,13 @@ Los colores permitidos son:
   * PURPLE
   * TEAL
   * GRAY
-  * RED   
+  * RED
   * BROWN
   * GOLDEN
-  
+
   ## Ejemplo.
   Funciona con python 2 y python 3.
-  
+
   python sierpinski.py -b WHITE --tiles RED -rl 6
-  
+
   ![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/sierpinski_red.png)

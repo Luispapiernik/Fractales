@@ -17,15 +17,12 @@ class Sierpinski:
             nlength = length // 3
             x0, y0 = x + nlength, y + nlength
             self.drawer.rectangle(
-                [x0, y0, x0 + nlength, y0 + nlength],
-                self.tiles_color, self.tiles_color
+                [x0, y0, x0 + nlength, y0 + nlength], self.tiles_color, self.tiles_color
             )
 
             for i, j in product([0, 1, 2], [0, 1, 2]):
                 self.generate_carpet(
-                    recursion_level - 1,
-                    (x + i * nlength, y + j * nlength),
-                    nlength
+                    recursion_level - 1, (x + i * nlength, y + j * nlength), nlength
                 )
 
 

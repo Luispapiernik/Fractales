@@ -99,7 +99,7 @@ def mandelbrot(
         if is_vertical_symmetric:
             flipped_array = np.flip(
                 array[
-                    (height & 1):,
+                    (height & 1) :,
                 ],
                 axis=0,
             )

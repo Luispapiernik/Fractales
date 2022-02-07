@@ -19,13 +19,13 @@ class CombinedFormatters(RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormat
 def parse_color(color):
     if color.replace(" ", "").isdigit() and len(color) > 1:
         return tuple(map(int, color.strip().split(" ")))
-    
+
     return color
 
 
 def parse_palette_color(color):
     color = parse_color(color)
-    
+
     if isinstance(color, str):
         color = colors.to_rgba(color)
         color = tuple(map(int, color))
@@ -68,7 +68,10 @@ def process_args(args):
     args.palette = get_palette(args)
 
     if get_channels(mode=args.image_mode) == 1:
-        if isinstance(args.background_color, str) and args.background_color.strip().isdigit():
+        if (
+            isinstance(args.background_color, str)
+            and args.background_color.strip().isdigit()
+        ):
             args.background_color = int(args.background_color.strip())
         if isinstance(args.color, str) and args.color.strip().isdigit():
             args.color = int(args.color.strip())
@@ -78,11 +81,10 @@ def process_args(args):
             and args.background_color.strip().isalpha()
         ):
             args.background_color = colors.to_rgba(args.background_color)
-            args.background_color = tuple(map(lambda x: int(255 * x), args.background_color))
-        if (
-            isinstance(args.color, str)
-            and args.color.strip().isalpha()
-        ):
+            args.background_color = tuple(
+                map(lambda x: int(255 * x), args.background_color)
+            )
+        if isinstance(args.color, str) and args.color.strip().isalpha():
             args.color = colors.to_rgba(args.color)
             args.color = tuple(map(lambda x: int(255 * x), args.color))
 
@@ -127,7 +129,7 @@ def execute(args):
         image.save(args.output_file)
         if args.show:
             image.show()
-    
+
     if args.sierpinski:
         w = args.width or args.size[0]
         h = args.height or args.size[1]
