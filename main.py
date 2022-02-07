@@ -3,49 +3,34 @@ from argparse import (
     ArgumentParser,
     RawDescriptionHelpFormatter,
 )
-from typing import List, Tuple, Union
 
 from matplotlib import cm, colors
-from PIL import ImagePalette
 
+from fractals.barnsley import barnsley
 from fractals.mandelbrot import mandelbrot
-
-RGB = Union[Tuple[int, int, int], List[float]]
-RGBA = Tuple[int, int, int, int]
-Color = Union[int, RGB, RGBA, str]
+from fractals.sierpinski import sierpinski
+from fractals.utils import colors_list_to_palette, get_channels
 
 
 class CombinedFormatters(RawDescriptionHelpFormatter, ArgumentDefaultsHelpFormatter):
     pass
 
 
-def parse_background_color(color: str) -> Color:
-    # TODO: This should be revised
-    if color.isdigit():
-        return int(color)
-    if color.replace(" ", "").isdigit():
+def parse_color(color):
+    if color.replace(" ", "").isdigit() and len(color) > 1:
         return tuple(map(int, color.strip().split(" ")))
+    
     return color
 
 
 def parse_palette_color(color):
-    if color.replace(" ", "").isdigit() and len(color) > 1:
-        return tuple(map(int, color.strip().split(" ")))
+    color = parse_color(color)
+    
+    if isinstance(color, str):
+        color = colors.to_rgba(color)
+        color = tuple(map(int, color))
 
-    color = colors.to_rgba(color)
-    return tuple(map(int, color))
-
-
-def float_colors_to_int_colors(colors: List[RGB]) -> List[RGB]:
-    return [tuple(int(255 * channel) for channel in color) for color in colors]
-
-
-def colors_list_to_palette(colors_list):
-    palette = ImagePalette.ImagePalette(mode="P")
-    for color in float_colors_to_int_colors(colors=colors_list):
-        palette.getcolor(tuple(color))
-
-    return palette
+    return color
 
 
 def get_palette(args):
@@ -82,6 +67,25 @@ def get_palette(args):
 def process_args(args):
     args.palette = get_palette(args)
 
+    if get_channels(mode=args.image_mode) == 1:
+        if isinstance(args.background_color, str) and args.background_color.strip().isdigit():
+            args.background_color = int(args.background_color.strip())
+        if isinstance(args.color, str) and args.color.strip().isdigit():
+            args.color = int(args.color.strip())
+    else:
+        if (
+            isinstance(args.background_color, str)
+            and args.background_color.strip().isalpha()
+        ):
+            args.background_color = colors.to_rgba(args.background_color)
+            args.background_color = tuple(map(lambda x: int(255 * x), args.background_color))
+        if (
+            isinstance(args.color, str)
+            and args.color.strip().isalpha()
+        ):
+            args.color = colors.to_rgba(args.color)
+            args.color = tuple(map(lambda x: int(255 * x), args.color))
+
     return args
 
 
@@ -104,6 +108,39 @@ def execute(args):
             verbose=args.verbose,
         )
 
+        image.save(args.output_file)
+        if args.show:
+            image.show()
+
+    if args.barnsley:
+        image = barnsley(
+            width=args.width or args.size[0],
+            height=args.height or args.size[1],
+            x_interval=args.x_interval,
+            y_interval=args.y_interval,
+            background_color=args.background_color,
+            color=args.color,
+            mode=args.image_mode,
+            max_iteration=args.max_iteration,
+        )
+
+        image.save(args.output_file)
+        if args.show:
+            image.show()
+    
+    if args.sierpinski:
+        w = args.width or args.size[0]
+        h = args.height or args.size[1]
+        length = max(h, w)
+        image = sierpinski(
+            length=length,
+            background_color=args.background_color,
+            color=args.color,
+            mode=args.image_mode,
+            max_iteration=args.max_iteration,
+        )
+
+        image.save(args.output_file)
         if args.show:
             image.show()
 
@@ -119,7 +156,9 @@ def main():
     general_args = parser.add_argument_group("General args")
     geometrical_args = parser.add_argument_group("Geometrical args")
     palette_args = parser.add_argument_group("Palette args")
+    barnsley_args = parser.add_argument_group("Barnsley args")
     mandelbrot_args = parser.add_argument_group("Mandelbrot args")
+    sierpinski_args = parser.add_argument_group("Sierpinkski args")
 
     # generals args
     general_args.add_argument(
@@ -134,7 +173,7 @@ def main():
         "--image-mode",
         default="L",
         metavar="IMAGE MODE",
-        choices=["L", "P"],
+        choices=["1", "L", "P", "RGB", "RGBA", "CMYK", "YCbCr", "LAB", "HSV"],
         help="mode of the output image. This specify what color schema must be applied.",
     )
     general_args.add_argument(
@@ -155,9 +194,17 @@ def main():
         "-bc",
         "--background-color",
         metavar="COLOR",
-        type=parse_background_color,
+        type=parse_color,
         help="background color of the output image.",
         default=0,
+    )
+    general_args.add_argument(
+        "-c",
+        "--color",
+        metavar="COLOR",
+        type=parse_color,
+        help="edit.",
+        default=255,
     )
     general_args.add_argument("--show", action="store_true", help="show the image")
     general_args.add_argument("-v", "--verbose", action="count", default=0)
@@ -210,6 +257,12 @@ def main():
     )
 
     # Barnsley args
+    # TODO: add parameters to control the afin transformations
+    barnsley_args.add_argument(
+        "--barnsley",
+        action="store_true",
+        help="edit.",
+    )
 
     # mandelbrot args
     mandelbrot_args.add_argument(
@@ -246,6 +299,11 @@ def main():
     )
 
     # Sierpinski
+    sierpinski_args.add_argument(
+        "--sierpinski",
+        action="store_true",
+        help="edit.",
+    )
 
     args = parser.parse_args()
     args = process_args(args)

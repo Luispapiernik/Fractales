@@ -2,15 +2,12 @@ import time
 from itertools import product
 from math import isclose, log
 from multiprocessing import Pool, cpu_count
-from numbers import Real
-from typing import Optional, Tuple, Union
+from typing import Optional
 
 import numpy as np
 
 from fractals.cartesian import CartesianArray
-
-Coordinate = Tuple[Real, Real]
-Color = Union[int, str, Tuple[int, int, int], Tuple[int, int, int]]
+from fractals.schemas import Color, Coordinate
 
 
 class MandelbrotSet:
@@ -113,8 +110,6 @@ def mandelbrot(
     image = mandelbrot_image.get_image()
     if mode == "P":
         image.putpalette(palette)
-
-    image.save("mandelbrot.png")
     return image
 
 
