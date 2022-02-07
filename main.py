@@ -33,7 +33,7 @@ def parse_palette_color(color):
         return tuple(map(int, color.strip().split(" ")))
 
     color = colors.to_rgba(color)
-    return tuple(int(255 * channel) for channel in color)
+    return tuple(map(int, color))
 
 
 def float_colors_to_int_colors(colors: List[RGB]) -> List[RGB]:
@@ -66,10 +66,12 @@ def get_palette(args):
         return colors_list_to_palette(colors_list)
 
     if args.palette_nodes:
-        # TODO: this must be changed
-        cmap = colors.LinearSegmentedColormap.from_list(
-            "user_defined", args.palette_nodes
-        )
+        data = args.palette_nodes
+        if args.nodes_weights:
+            assert len(data) == len(args.nodes_weights)
+            data = list(zip(args.nodes_weights, data))
+
+        cmap = colors.LinearSegmentedColormap.from_list("user_defined", data, N=256)
 
         colors_list = cmap(range(256))
         return colors_list_to_palette(colors_list)
@@ -190,6 +192,13 @@ def main():
         "--palette-nodes",
         metavar="COLOR",
         type=parse_palette_color,
+        nargs="+",
+        help="edit.",
+    )
+    palette_args.add_argument(
+        "-nw",
+        "--nodes-weights",
+        type=float,
         nargs="+",
         help="edit.",
     )
