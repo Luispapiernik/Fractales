@@ -1,163 +1,91 @@
 # Fractales
 
-Recopilación de scripts creados en python con el uso de la librería estándar
-para generar algunos fractales.
+compilation of python scripts for the generation of various fractals.
 
-## Imagenes
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_red.png)
-![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/fractal.png)
-![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/fractal.png)
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot.png)
+**Notice:** The documentation is not complete, this collection of scripts is capable of much more than what is specified in this README, such as parallelizing the generation of fractals, different ways of choosing color palettes, ... Review in detail the comand line help.
 
+**A complete documentation is on its way.**
 
-# Examples
-python main.py --mandelbrot --size 1000 1000 -s --show -vvv --image-mode P -pnd black red
-python main.py --mandelbrot --size 1000 1000 -s --show -vvv --image-mode P -pnd black yellow red black
+The complete set of options is given by
 
+```bash
+usage: main.py [--help] [-o FILENAME] [-im IMAGE MODE] [--size WIDTH HEIGHT] [-w WIDTH] [-h HEIGHT] [-bc COLOR] [-c COLOR] [--show] [-v] [--version] [-x xi xf]
+               [-y yi yf] [-pn PALETTE_NAME] [-pnd COLOR [COLOR ...]] [-nw NODES_WEIGHTS [NODES_WEIGHTS ...]] [-i] [--barnsley] [--mandelbrot] [-m MAX_ITERATION]
+               [-er ESCAPE_RADIUS] [-s] [-p PROCESS_NUMBER] [--sierpinski]
 
-
-
-
-# MANDELBROT
-# Mandelbrot
-
-El conjunto de mandelbrot se define con la sucesión recursiva
-
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/ecuacion.png)
-
-donde c es un punto arbitrario en el plano complejo, se dice que un punto
-c pertenece al conjunto si la sucesión esta acotada. Este programa genera una imagen
-(con formato png, jpg u otro manejado por PIL, modulo de python) que representa dicho
-conjunto, usando un algoritmo de escape en el que se itera sobre todos los puntos del
-plano complejo c = x + iy donde -2 < x < 2 y -2 < y < 2. Para saber si un punto c esta en
-el conjunto, se itera hasta un número dado y dependiendo de cuantas iteraciones
-sean necesarias para considerarla como una sucesión no acotada, se le asigna un color.
-
-Si se ejecuta sin argumentos da como resultado la siguiente imagen:
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_default.png)
-
-usage:
-
-     mandelbrot.py [-h] [-n FILENAME] [--size WIDTH HEIGHT] [-w WIDTH]
-                     [--height HEIGHT] [-x xi xf] [-y yi yf] [-bc R G B]
-                     [-p RED GREEN BLUE] [-pr RED] [-pg GREEN] [-pb BLUE]
-                     [-m MAX_ITERATION]
+Generates multiples fractals
 
 optional arguments:
+  --help                show this help message and exit
 
-     -h, --help            show this help message and exit
-     -n FILENAME, --name-image FILENAME
-                        name of output image. Default value is mandelbrot.png
-     --size WIDTH HEIGHT   size of output image in pixels. Default value is (360,
-                        360)
-     -w WIDTH, --width WIDTH
-                        width of the output image
-     --height HEIGHT       height of the output image
-     -x xi xf, --xinterval xi xf
-                        interval of visualisation in the X axis
-     -y yi yf, --yinterval yi yf
-                        interval of visualisation in the Y axis
-     -bc R G B, --background-color R G B
-     -p RED GREEN BLUE, --percents RED GREEN BLUE
-                        percents of each colors. Default value is (12.0, 15.0,
-                        20.0)
-     -pr RED, --percent-red RED
-                        percent of color red
-     -pg GREEN, --percent-green GREEN
-                        percent of color green
-     -pb BLUE, --percent-blue BLUE
-                        percent of color blue
-     -m MAX_ITERATION, --max-iteration MAX_ITERATION
-                        maximum iteration. Default value is 100
+General args:
+  -o FILENAME, --output-file FILENAME
+                        name of output image. (default: fractal.png)
+  -im IMAGE MODE, --image-mode IMAGE MODE
+                        mode of the output image. This specify what color schema must be applied. (default: L)
+  --size WIDTH HEIGHT   size of output image in pixels. (default: (512, 512))
+  -w WIDTH, --width WIDTH
+                        width of the output image in pixels. (default: None)
+  -h HEIGHT, --height HEIGHT
+                        height of the output image in pixels. (default: None)
+  -bc COLOR, --background-color COLOR
+                        background color of the output image. (default: 0)
+  -c COLOR, --color COLOR
+                        edit. (default: 255)
+  --show                show the image (default: False)
+  -v, --verbose
+  --version             show program's version number and exit
 
+Geometrical args:
+  -x xi xf, --x-interval xi xf
+                        interval of visualisation in the X axis (default: (-2, 2))
+  -y yi yf, --y-interval yi yf
+                        interval of visualisation in the Y axis (default: (-2, 2))
 
-## Ejemplos
+Palette args:
+  -pn PALETTE_NAME, --palette-name PALETTE_NAME
+                        edit. (default: None)
+  -pnd COLOR [COLOR ...], --palette-nodes COLOR [COLOR ...]
+                        edit. (default: None)
+  -nw NODES_WEIGHTS [NODES_WEIGHTS ...], --nodes-weights NODES_WEIGHTS [NODES_WEIGHTS ...]
+                        edit. (default: None)
+  -i, --invert-palette  edit. (default: False)
 
-Funciona con python 3
+Barnsley args:
+  --barnsley            edit. (default: False)
 
-python mandelbrot.py --percent-red 1
+Mandelbrot args:
+  --mandelbrot          edit. (default: False)
+  -m MAX_ITERATION, --max-iteration MAX_ITERATION
+                        maximum iteration. (default: 20)
+  -er ESCAPE_RADIUS, --escape-radius ESCAPE_RADIUS
+                        edit. (default: 1000)
+  -s, --smooth-bands    edit. (default: False)
+  -p PROCESS_NUMBER, --process-number PROCESS_NUMBER
+                        number of process for the paralelization, if zero is passed the maximum number allowed will be used. (default: 0)
 
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/add.png)
+Sierpinkski args:
+  --sierpinski          edit. (default: False)
+```
 
-python mandelbrot.py --size 5000 5000 --percents 60 40 20
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_5000.png)
-
-python mandelbrot.py --size 1000 1000 --percents 20 1 1
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_red.png)
-
-python mandelbrot.py --size 1000 1000 --percents 1 1 20
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_blue.png)
-
-python mandelbrot.py --size 1000 1000 --percents 1 20 1
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_green.png)
-
-python mandelbrot.py --size 1000 1000 --percents 20 20 20
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_gray.png)
-
-python mandelbrot.py --size 1000 500 --percents 2 4 6 -m 1000 -x -2 2 -y 0 2
-![](https://github.com/Luispapiernik/Fractales/blob/master/Mandelbrot/Images/mandelbrot_good.png)
-
-
-# BARNSLEY
-
-# Barnsley Fern
-
-
-Si se ejecuta el programa sin argumentos la imagen obtenida es:
-
-![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/barnsley.png)
-
-## Ejemplos
-
-Funciona con python 3
-
-python barnsley.py --size 1024 1024 --color RED -i 100000
-![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/ej2.png)
-
-python barnsley.py --size 1024 1024 --color Green -i 500000 -n ej3.png
-![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/ej3.png)
-
-python barnsley.py --size 1024 1024 -x 0 2.5 -y 5 7.5 -i 1000000
-![](https://github.com/Luispapiernik/Fractales/blob/master/Barnsley/Images/ej4.png)
+## Some Examples
+```bash
+python main.py --mandelbrot --smooth-bands -pnd black black red -nw 0 0.5 1 -im P
+```
+![](./images/example_1.png)
 
 
-# SIERPINSKI
-# Alfombra de Sierpinski
+```bash
+python main.py --mandelbrot --smooth-bands -pn turbo -im P -i
+```
+![](./images/example_2.png)
 
-Cuando se ejecuta el script sin argumentos da como resultado la siguiente imagen
+```bash
+python main.py --sierpinski -m 3
+```
+![](./images/example_3.png)
 
-![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/sierpinski.png)
-
-Los argumentos permitidos son:
-  * **-n o --name-image**: nombre de la imagen de salida
-  * **-l o --length**: es un entero que especifica el tamaño de la imagen de salida.
-  * **-b o --background**: color de fondo de la imagen.
-  * **-t o --tiles**: color de los cuadros
-  * **-rl o --recursion-level**: indica el nivel de recursión para la construcción de la imagen
-  * **-h o --help**: ayuda.
-  * **--version**: muestra versión.
-
-
-Los colores permitidos son:
-  * WHITE
-  * BLACK
-  * CYAN
-  * GREEN
-  * BLUE
-  * YELLOW
-  * ORANGE
-  * MAGENTA
-  * SILVER
-  * PURPLE
-  * TEAL
-  * GRAY
-  * RED
-  * BROWN
-  * GOLDEN
-
-  ## Ejemplo.
-  Funciona con python 2 y python 3.
-
-  python sierpinski.py -b WHITE --tiles RED -rl 6
-
-  ![](https://github.com/Luispapiernik/Fractales/blob/master/Sierpinski/Images/sierpinski_red.png)
+```bash
+python main.py --barnsley -m 100000 --x-interval -5 5 --y-interval 0 10 -c green -im RGB
+```
+![](./images/example_4.png)
