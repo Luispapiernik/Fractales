@@ -1,7 +1,8 @@
 from numbers import Real
-from typing import List, Tuple, Union
+from typing import Tuple, Union
 
-RGB = Union[Tuple[int, int, int], List[float]]
+RGB = Tuple[int, int, int]
 RGBA = Tuple[int, int, int, int]
 Color = Union[int, RGB, RGBA, str]
-Coordinate = Tuple[Real, Real]
+Coordinate = Union[Tuple[Real, Real], Tuple[int, int]]
+Component = Union[Real, int]
