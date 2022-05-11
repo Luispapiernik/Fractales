@@ -1,18 +1,28 @@
 from numbers import Real
-from typing import Any, Tuple
+from typing import Any
 
 import numpy as np
 from PIL import Image
 
-from fractals.utils import get_channels
-
-Coordinate = Tuple[Real, Real]
+from fractals.schemas import Color, Component, Coordinate
+from fractals.utils import get_channels_number
 
 
 class Cartesian:
     """
-    This class handles the conversion of coordinates between a region of the
-    cartesian plane and a matrix (rectangular region with integer coordinates)
+    This class handles the conversion of coordinates between a region on the
+    cartesian plane and a matrix (rectangular region with integer coordinates).
+
+    Parameters
+    ----------
+    x_interval: Coordinate
+        limits in the x coordinate of the region on the cartesian plane.
+    y_interval: Coordinate
+        limits in the y coordinate of the region on the cartesian plane.
+    width: int
+        width of the matrix.
+    height: int
+        height of the matrix.
     """
 
     def __init__(
@@ -23,10 +33,24 @@ class Cartesian:
         self.height = height
         self.width = width
 
-    def bijection(self, *, w: Real, h: Real) -> Coordinate:
+    def bijection(self, *, w: Component, h: Component) -> Coordinate:
         """
-        This method does not represent a strict bijection. This method converts
-        a coordinate in the matrix into a coordinate on the Cartesian plane.
+        This method converts a coordinate in the matrix into a coordinate on
+        the Cartesian plane.
+
+        Parameters
+        ----------
+        w, h: int, int
+            coordinate of the point in the matrix.
+
+        Returns
+        -------
+        out: Coordinate
+            coordinate of the associated point in the cartesian plane.
+
+        Note
+        ----
+            This method does not represent a strict bijection.
         """
         x = (w + self.width / 2) * (
             self.x_interval[1] - self.x_interval[0]
@@ -36,10 +60,24 @@ class Cartesian:
         ) / self.height + self.y_interval[0]
         return x, y
 
-    def inverse_bijection(self, *, x: Real, y: Real) -> Coordinate:
+    def inverse_bijection(self, *, x: Component, y: Component) -> Coordinate:
         """
-        This method does not represent a strict bijection. This method converts
-        a coordinate in the Cartesian plane into a coordinate on the matrix.
+        This method converts a coordinate in the Cartesian plane into a
+        coordinate on the matrix.
+
+        Parameters
+        ----------
+        x, y: Real, Real
+            coordinate of the point in the cartesian plane.
+
+        Returns
+        -------
+        out: Coordinate
+            coordinate of the associated point in the matrix.
+
+        Note
+        ----
+            This method does not represent a strict bijection.
         """
         w = (x - self.x_interval[0]) * self.width / (
             self.x_interval[1] - self.x_interval[0]
@@ -49,19 +87,39 @@ class Cartesian:
         ) - self.height / 2
         return w, h
 
-    def get_coordinate(self, *, column: int, row: int) -> Coordinate:
+    def get_coordinate(self, *, column: Component, row: Component) -> Coordinate:
         """
         This method returns the coordinate (x, y) in the plane, given a
-        position in the matrix
+        position in the matrix.
+
+        Parameters
+        ----------
+        column, row: int, int
+            coordinate of the point in the matrix.
+
+        Returns
+        -------
+        out: Coordinate
+            coordinate of the associated point in the cartesian plane.
         """
         w = column - self.width / 2
         h = -row + self.height / 2
         return self.bijection(w=w, h=h)
 
-    def get_position(self, *, x: Real, y: Real) -> Coordinate:
+    def get_position(self, *, x: Component, y: Component) -> Coordinate:
         """
-        This method returns a position in the matrix given some coordinates
-        (x, y) in the plane
+        This method returns a position in the matrix given some coordinate
+        (x, y) in the plane.
+
+        Parameters
+        ----------
+        x, y: Real, Real
+            coordinate of the point in the cartesian plane.
+
+        Returns
+        -------
+        out: Coordinate
+            coordinate of the associated point in the matrix.
         """
         x, y = self.inverse_bijection(x=x, y=y)
         column = int(x + self.width / 2)
@@ -72,6 +130,21 @@ class Cartesian:
 class CartesianImage(Cartesian):
     """
     This class represents an image in the Cartesian plane
+
+    Parameters
+    ----------
+    width: int
+        width of the image.
+    height: int
+        height of the image.
+    x_interval: Coordinate
+        limits in the x coordinate of the region on the cartesian plane.
+    y_interval: Coordinate
+        limits in the y coordinate of the region on the cartesian plane.
+    color: int or Tuple[int, int, int] or Tuple[int, int, int, int]
+        initial color of the image.
+    mode: str
+        color mode of the image.
     """
 
     def __init__(
@@ -99,7 +172,19 @@ class CartesianImage(Cartesian):
 
         return getattr(self._image, key)
 
-    def putpixel(self, *, position: Coordinate, color, to_int=True):
+    def putpixel(self, *, position: Coordinate, color: Color, to_int=True) -> None:
+        """
+        This method set the color of a specific pixel.
+
+        Parameters
+        ----------
+        position: Coordinate
+            position of the especifi pixel.
+        color: Color
+            color to use.
+        to_int: bool
+            specifies when to change from Cartesian to matrix coordinates.
+        """
         if to_int:
             position = self.get_position(x=position[0], y=position[1])
         self._image.putpixel(position, color)
@@ -107,7 +192,22 @@ class CartesianImage(Cartesian):
 
 class CartesianArray(Cartesian):
     """
-    This class represents an image in the Cartesian plane
+    This class represents an image in the Cartesian plane manage throught arrays.
+
+    Parameters
+    ----------
+    width: int
+        width of the image.
+    height: int
+        height of the image.
+    x_interval: Coordinate
+        limits in the x coordinate of the region on the cartesian plane.
+    y_interval: Coordinate
+        limits in the y coordinate of the region on the cartesian plane.
+    color: int or Tuple[int, int, int] or Tuple[int, int, int, int]
+        initial color of the image.
+    mode: str
+        color mode of the image.
     """
 
     def __init__(
@@ -126,7 +226,7 @@ class CartesianArray(Cartesian):
             )
 
         self.mode = mode
-        self.channels = get_channels(mode=mode)
+        self.channels = get_channels_number(mode=mode)
         if self.channels > 1:
             self.array = np.ones((height, width, self.channels))
             # self.array = np.insert(self.array[:, :, None], [1], [1, 1], axis=2)
@@ -135,22 +235,51 @@ class CartesianArray(Cartesian):
         self.array[:, :] = color
 
     def write_sub_array(self, x_offset: int, y_offset: int, array: np.ndarray) -> None:
+        """
+        This method write a subarray on the image array.
+
+        Parameters
+        ----------
+        x_offset, y_offset: int, int
+            point where the subarray is writed.
+        """
         self.array[
             y_offset: y_offset + array.shape[0], x_offset: x_offset + array.shape[1]
         ] = array
 
     def putpixel(self, *, position: Coordinate, color, to_int=True):
+        """
+        This method set the color of a specific pixel.
+
+        Parameters
+        ----------
+        position: Coordinate
+            position of the especifi pixel.
+        color: Color
+            color to use.
+        to_int: bool
+            specifies when to change from Cartesian to matrix coordinates.
+        """
         if to_int:
             position = self.get_position(x=position[0], y=position[1])
         self.array[position[1], position[0]] = color
 
-    def get_image(self):
+    def get_image(self) -> Image.Image:
+        """
+        This method returns the image.
+
+        Returns
+        -------
+        out: Image.Image
+            image.
+        """
         return Image.fromarray(np.uint8(self.array), self.mode)
 
 
 def test_sin_1():
     image = CartesianImage(
-        width=1000, height=1000, x_interval=(-6 * np.pi, 6 * np.pi), y_interval=(-2, 2)
+        width=1000, height=1000, x_interval=(-6 * np.pi, 6 * np.pi),
+        y_interval=(-2, 2)
     )
 
     for x in np.arange(-6 * np.pi, 6 * np.pi, 0.0001):
@@ -161,7 +290,8 @@ def test_sin_1():
 
 def test_sin_2():
     image = CartesianArray(
-        width=1000, height=1000, x_interval=(-6 * np.pi, 6 * np.pi), y_interval=(-2, 2)
+        width=1000, height=1000, x_interval=(-6 * np.pi, 6 * np.pi),
+        y_interval=(-2, 2)
     )
 
     for x in np.arange(-6 * np.pi, 6 * np.pi, 0.0001):
