@@ -1,6 +1,6 @@
 # Fractal Generator <!-- no toc -->
 
-This is a solution that allows you to generalize various fractals in an efficient way.
+This is a solution that allows you to generate various fractals in an efficient way.
 
 - [About fractals](#about-fractals)
   - [Mandelbrot](#mandelbrot)
@@ -22,26 +22,28 @@ A [fractal](https://en.wikipedia.org/wiki/Fractal) is a term used to describe ge
 - **Irregularity locally** and **globally** that cannot easily be described in the language of traditional Euclidean geometry other than as the limit of a recursively defined sequence of stages.
 
 ### Mandelbrot
-The [Mandelbrot](https://en.wikipedia.org/wiki/Mandelbrot_set) set is the set of complex numbers $c$ for which the function $f_{c}(z)=z^{2}+c$ does not diverge to infinity when iterated from $z = 0$, i.e., for which the sequence $f_c(0), f_c(f_c(0))$, $\ \dots$, remains bounded in absolute value. Thus, a complex number $c$ is a member of the Mandelbrot set if, when starting with $z_{0}=0$ and applying the iteration repeatedly, the absolute value of $z_{n}$ remains bounded for all $n > 0$.
+![](./images/mandelbrot.png)
 
-<span style="color:red;">This section is not finished</span>
+The [Mandelbrot](https://en.wikipedia.org/wiki/Mandelbrot_set) set is the set of complex numbers $c$ for which the function $f_{c}(z)=z^{2}+c$ does not diverge to infinity when iterated from $z = 0$, i.e., for which the sequence $f_c(0), f_c(f_c(0))$, $\ \dots$, remains bounded in absolute value. Thus, a complex number $c$ is a member of the Mandelbrot set if, when starting with $z_{0}=0$ and applying the iteration repeatedly, the absolute value of $z_{n}$ remains bounded (falls in a circle of a fixed radius $r$) for all $n > 0$.
 
 ### Barnsley
-The [Barnsley](https://en.wikipedia.org/wiki/Barnsley_fern) fern is a fractal named after the British mathematician Michael Barnsley. This uses four affine transformations of the form
+![](./images/barnsley.png)
+
+The [Barnsley](https://en.wikipedia.org/wiki/Barnsley_fern) Fern is a fractal named after the British mathematician Michael Barnsley, which is an example of an iterated function system ([IFS](https://en.wikipedia.org/wiki/Iterated_function_system)) to create a fractal. He made it to resemble the black spleenwort using four affine transformations of the form:
 
 $$
 f(x,y) =
 \begin{bmatrix}
-a & b\\[0.3em]
+a & b\\
 c & d\\
 \end{bmatrix}
 \begin{bmatrix}
-x\\[0.3em]
+x\\
 y\\
 \end{bmatrix}
 +
 \begin{bmatrix}
-e\\[0.3em]
+e\\
 f\\
 \end{bmatrix}
 $$
@@ -60,11 +62,11 @@ specifically, the transformations have the form
 $$
 f_1(x,y) =
 \begin{bmatrix}
-0 & 0\\[0.3em]
+0 & 0\\
 0 & 0.16\\
 \end{bmatrix}
 \begin{bmatrix}
-x\\[0.3em]
+x\\
 y\\
 \end{bmatrix}
 $$
@@ -72,16 +74,16 @@ $$
 $$
 f_2(x,y) =
 \begin{bmatrix}
-0.85 & 0.04\\[0.3em]
+0.85 & 0.04\\
 -0.04 & 0.85\\
 \end{bmatrix}
 \begin{bmatrix}
-x\\[0.3em]
+x\\
 y\\
 \end{bmatrix}
 +
 \begin{bmatrix}
-0\\[0.3em]
+0\\
 1.6\\
 \end{bmatrix}
 $$
@@ -89,16 +91,16 @@ $$
 $$
 f_3(x,y) =
 \begin{bmatrix}
-0.2 & -0.26\\[0.3em]
+0.2 & -0.26\\
 0.23 & 0.22\\
 \end{bmatrix}
 \begin{bmatrix}
-0\\[0.3em]
+0\\
 1.6\\
 \end{bmatrix}
 +
 \begin{bmatrix}
-e\\[0.3em]
+e\\
 f\\
 \end{bmatrix}
 $$
@@ -107,27 +109,24 @@ $$
 $$
 f_4(x,y) =
 \begin{bmatrix}
--0.15 & 0.28\\[0.3em]
+-0.15 & 0.28\\
 0.26 & 0.24\\
 \end{bmatrix}
 \begin{bmatrix}
-x\\[0.3em]
+x\\
 y\\
 \end{bmatrix}
 +
 \begin{bmatrix}
-0\\[0.3em]
+0\\
 0.44\\
 \end{bmatrix}
 $$
 
-<span style="color:red;">This section is not finished</span>
-
 ### Sierpinski
+![](./images/sierpinski.png)
 
 The [Sierpiński carpet](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_carpet) is a plane fractal that generalize the Cantor set to two dimensions.
-
-<span style="color:red;">This section is not finished</span>
 
 ## Usage
 The complete set of options is given by
